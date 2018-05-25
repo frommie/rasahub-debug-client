@@ -9,6 +9,9 @@ import sys
 is_py2 = sys.version[0] == '2'
 
 def main():
+    """
+    Starts socket connection, sending and receiving threads
+    """
     msg_socket = socket.socket()
     args = sys.argv
     msg_socket.connect(('127.0.0.1', int(args[1])))
@@ -23,17 +26,22 @@ def main():
     print("threads started")
 
 def in_thread(msg_socket, run_event):
+    """
+    In thread for incoming messages
+    """
     while (not run_event.is_set()):
         in_message = msg_socket.recv(1024).decode('utf-8')
         if in_message is not None:
             print(in_message)
-            print(len(in_message))
         if len(in_message) == 0:
             end_processes(msg_socket, run_event)
         time.sleep(0.5)
     print("in_thread closed")
 
 def out_thread(msg_socket, run_event):
+    """
+    Out thread for sending messages
+    """
     while (not run_event.is_set()):
         timeout = 10
         try:
@@ -52,6 +60,9 @@ def out_thread(msg_socket, run_event):
     print("out_thread closed")
 
 def end_processes(msg_socket, run_event):
+    """
+    Shuts down socket connection, end threads
+    """
     print("shutting down..")
     run_event.set()
     msg_socket.shutdown(socket.SHUT_RDWR)
