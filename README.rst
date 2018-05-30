@@ -1,8 +1,8 @@
-====================
-Rasahub-Debug-Client
-====================
+=============
+Rasahub-Debug
+=============
 
-Rasahub-Debug is a simple socket connector for debugging Rasahub.
+Rasahub-Debug-Client is a command line tool to connect to `Rasahub-Debug`_.
 
 ----
 
@@ -21,51 +21,29 @@ Install via pip:
 
 .. code-block:: bash
 
-  pip install rasahub-debug
+  pip install rasahub-debug-client
 
 
 Usage
 =====
 
-Create configuration
---------------------
-
-Create file config.yml in working path. Example:
-
-.. code-block:: yaml
-
-  debug1:
-    package: 'rasahub_debug'
-    classname: 'DebugConnector'
-    init:
-      host: '127.0.0.1'
-      port: 5020
-    out: 'debug2'
-
-  debug2:
-    package: 'rasahub_debug'
-    classname: 'DebugConnector'
-    init:
-      host: '127.0.0.1'
-      port: 5021
-    out: 'debug1'
-
-
-Then spawn debuggers (rasahub-debugger-client) on the specified port.
-
-
-Command-Line API
-----------------
-
-Start rasahub:
+Start the client:
 
 .. code-block:: bash
 
-  python -m rasahub
+  python -m rasahub-debug-client <port>
+
+
+For example:
+
+.. code-block:: bash
+
+  python -m rasahub-debug-client 5020
 
 
 
 * License: MIT
 * `PyPi`_ - package installation
 
+.. _Rasahub-Debug: https://github.com/frommie/rasahub-debug
 .. _PyPi: https://pypi.python.org/pypi/rasahub
